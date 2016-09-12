@@ -1,5 +1,5 @@
 {
-  "id": "/api-getway",
+  "id": "/movieapps/api-gateway/gateway",
   "cmd": null,
   "cpus": 0.2,
   "mem": 1000,
