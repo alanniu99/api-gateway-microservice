@@ -1,19 +1,21 @@
 [{
-  "id": "/movieapps/api-gateway/gateway",
+  "id": "/movies-sit/spring-service/gateway",
   "cmd": null,
   "cpus": 0.2,
-  "mem": 1000,
+  "mem": 2000,
   "disk": 0,
-  "instances": 0,
+  "instances": 2,
   "container": {
     "type": "DOCKER",
     "volumes": [],
     "docker": {
-      "image": "dockerniu/api-gateway-microservice",
+      "image": "dockerniu/api-gateway-microservice:${short_commit}",
       "network": "BRIDGE",
       "portMappings": [
         {
           "containerPort": 10000,
+          "hostPort": 0,
+          "servicePort": 80,
           "protocol": "tcp",
           "labels": {}
         }
@@ -38,5 +40,16 @@
   },
   "env": {
     "SPRING_PROFILES_ACTIVE": "docker"
-  }
+  },
+  "labels": {
+    "HAPROXY_GROUP": "external",
+    "HAPROXY_0_VHOST": "mesos-slave1",
+    "HAPROXY_0_MODE": "http"
+  },
+  "portDefinitions": [
+    {
+      "port": 80,
+      "protocol": "tcp",
+      "labels": {}
+    }]
 }]
